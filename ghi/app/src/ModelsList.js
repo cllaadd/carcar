@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { HashRouter, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function ModelsList() {
     const [models, setModels] = useState([])
