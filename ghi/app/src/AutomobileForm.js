@@ -7,6 +7,7 @@ class AutomobileForm extends React.Component {
             color: '',
             year: '',
             vin: '',
+            model: '',
             models: [],
 
         }
@@ -18,9 +19,11 @@ class AutomobileForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
+        data["model_id"] = data.model;
+        data["year"] = data.year;
         delete data.models;
 
-        const automobileUrl = `http://localhost:8100/api/automobiles`;
+        const automobileUrl = `http://localhost:8100/api/automobiles/`;
         const fetchConfig = {
             method: 'post',
             body: JSON.stringify(data),
