@@ -6,21 +6,26 @@ class ModelForm extends React.Component {
         this.state= {
             name: '',
             pictureUrl: '',
-            manufacturers: [],
+            manufacturer: [],
+            //allows manufacturer to exist as an object and a string
+            manufacturer: '',
         }
         this.handlePictureUrlChange = this.handlePictureUrlChange.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleNameChange = this.handleNameChange.bind(this);
+        this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
-        data.picture_url = data.pictureUrl
+        data.picture_url = data.pictureUrl;
+        // resolves manufacturer as a string to make manufacturer be the number of manufacturer_id
+        data["manufacturer_id"] = data.manufacturer
         delete data.pictureUrl;
         delete data.manufacturers;
 
-        const modelUrl = `http://localhost:8100/api/models/`;
+        const modelUrl = 'http://localhost:8100/api/models/';
         const fetchConfig = {
             method: 'post',
             body: JSON.stringify(data),
@@ -29,6 +34,7 @@ class ModelForm extends React.Component {
             },
         };
         const response = await fetch(modelUrl, fetchConfig);
+        console.log(response)
         if (response.ok) {
             const newModel = await response.json();
             console.log(newModel);
@@ -36,15 +42,20 @@ class ModelForm extends React.Component {
             const cleared = {
                 name: '',
                 pictureUrl: '',
-                model: '',
+                manufacturer: '',
             };
             this.setState(cleared);
         }
     }
 
-    handleInputChange(event) {
+    handleManufacturerChange(event) {
         const value = event.target.value;
-        this.setState({[event.target.id]: value})
+        this.setState({manufacturer: value})
+    }
+
+    handleNameChange(event) {
+        const value = event.target.value;
+        this.setState({name: value})
     }
 
     handlePictureUrlChange(event) {
@@ -71,7 +82,7 @@ class ModelForm extends React.Component {
                   <h1>Create a vehicle model</h1>
                   <form onSubmit={this.handleSubmit} id="create-model-form">
                     <div className="form-floating mb-3">
-                      <input onChange={this.handleInputChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
+                      <input onChange={this.handleNameChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
                       <label htmlFor="name">Name</label>
                     </div>
                     <div className="form-floating mb-3">
@@ -79,7 +90,7 @@ class ModelForm extends React.Component {
                       <label htmlFor="picture_url">Picture URL</label>
                     </div>
                     <div className="mb-3">
-                      <select onChange={this.handleInputChange} required id="manufacturer"  name="manufacturer" className="form-select">
+                      <select onChange={this.handleManufacturerChange} required id="manufacturer"  name="manufacturer" className="form-select">
                       <option value="">Choose a manufacturer</option>
                           {this.state.manufacturers?.map(manufacturer => {
                               return (
