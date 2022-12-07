@@ -8,12 +8,11 @@ class AutomobileVO(models.Model):
     import_href= models.CharField(max_length=200, unique=True)
 
 
+
 class Technician(models.Model):
     name = models.CharField(max_length=100)
     id = models.PositiveSmallIntegerField(primary_key=True)
 
-    def __str__(self):
-        return {self.name}
 
     class Meta:
         ordering = ("id",)
@@ -26,6 +25,11 @@ class Appointment(models.Model):
     reason = models.CharField(max_length=200)
     finished = models.BooleanField(default=False)
 
+    technician = models.ForeignKey(
+        Technician,
+        related_name="appointments",
+        on_delete=models.CASCADE,
+    )
     automobile = models.ForeignKey(
         AutomobileVO,
         related_name="appointments",

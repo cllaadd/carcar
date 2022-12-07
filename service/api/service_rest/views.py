@@ -43,12 +43,23 @@ def api_appointments(request):
     else:
         try:
             content = json.loads(request.body)
+            print(content)
+            vin = content["vin"]
+            auto = AutomobileVO.objects.get(vin=vin)
+            content["vin"] = auto["vin"]
             appointment = Appointment.objects.create(**content)
             return JsonResponse(
                 appointment,
                 encoder=AppointmentEncoder,
                 safe=False,
             )
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid automobile VIN"},
+                status=400,
+            )
+
+
         except:
             response = JsonResponse(
                 {"message": "Could not create the appointment"}
