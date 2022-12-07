@@ -23,6 +23,9 @@ function Nav() {
               <NavLink className="nav-link " id="automobiles" aria-current="page" to="automobiles">Automobiles</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link " id="sales/new" aria-current="page" to="sales/new">Create a sale record</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link " id="salespeople/new" aria-current="page" to="salespeople/new">Add a salesperson</NavLink>
             </li>
             <li className="nav-item">
