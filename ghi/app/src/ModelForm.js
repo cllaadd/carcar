@@ -19,7 +19,6 @@ class ModelForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
-        data.picture_url = data.pictureUrl;
         // resolves manufacturer as a string to make manufacturer be the number of manufacturer_id
         data["manufacturer_id"] = data.manufacturer
         delete data.pictureUrl;
