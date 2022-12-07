@@ -25,15 +25,12 @@ function Nav() {
             <li className="nav-item">
               <NavLink className="nav-link " id="salespeople/new" aria-current="page" to="salespeople/new">Add a salesperson</NavLink>
             </li>
-<<<<<<< HEAD
-=======
             <li className="nav-item">
               <NavLink className="nav-link " id="technicians/new" aria-current="page" to="technicians/new">Add a technician</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link " id="customers/new" aria-current="page" to="customers/new">Add a potential customer</NavLink>
             </li>
->>>>>>> main
           </ul>
         </div>
       </div>

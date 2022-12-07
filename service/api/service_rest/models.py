@@ -4,10 +4,7 @@ from django.urls import reverse
 
 
 class AutomobileVO(models.Model):
-    color = models.CharField(max_length=50)
-    year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
-    model = models.CharField(max_length=100)
     import_href= models.CharField(max_length=200, unique=True)
 
 

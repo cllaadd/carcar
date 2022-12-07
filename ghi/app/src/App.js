@@ -8,11 +8,8 @@ import ModelForm from './ModelForm';
 import AutomobilesList from './AutomobilesList';
 import AutomobileForm from './AutomobileForm';
 import SalespersonForm from './SalespersonForm';
-<<<<<<< HEAD
-=======
 import CustomerForm from './CustomerForm';
 import TechnicianForm from './TechnicianForm';
->>>>>>> main
 
 function App() {
   return (
@@ -38,6 +35,9 @@ function App() {
           </Route>
           <Route path="salespeople">
             <Route path="new" element={<SalespersonForm />} />
+          </Route>
+          <Route path="technicians">
+            <Route path="new" element={<TechnicianForm />} />
           </Route>
         </Routes>
       </div>
