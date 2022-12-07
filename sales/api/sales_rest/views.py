@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .encoders import SalespersonEncoder
-from .models import Salesperson
+from .encoders import SalespersonEncoder, CustomerEncoder
+from .models import Salesperson, Customer
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 import json
@@ -25,7 +25,32 @@ def api_salespeople(request):
             )
         except:
             response = JsonResponse(
-                {"message": "Cold not create salesperson"}
+                {"message": "Could not create salesperson"}
+            )
+            response.status_code = 400
+            return response
+
+
+@require_http_methods(["GET", "POST"])
+def api_customers(request):
+    if request.method == "GET":
+        customers = Customer.objects.all()
+        return JsonResponse(
+            {"customers": customers},
+            encoder = CustomerEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.create(**content)
+            return JsonResponse(
+                customer,
+                encoder = CustomerEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse(
+                {"message": "Could not create customer"}
             )
             response.status_code = 400
             return response
