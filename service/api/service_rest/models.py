@@ -1,42 +1,36 @@
 from django.db import models
 from django.urls import reverse
 
-# class VinVO(models.model):
-#     id = models.CharField(max_length=17, unique=True)
 
-# class Status(models.Model):
-#     id = models.PositiveSmallIntegerField(primary_key=True)
-#     name = models.CharField(max_length=10, unique=True)
 
-#     def __str__(self):
-#         return self.name
+class AutomobileVO(models.Model):
+    vin = models.CharField(max_length=17, unique=True)
+    import_href= models.CharField(max_length=200, unique=True)
 
 
 class Technician(models.Model):
     name = models.CharField(max_length=100)
     id = models.PositiveSmallIntegerField(primary_key=True)
 
+    def __str__(self):
+        return {self.name}
+
     class Meta:
         ordering = ("id",)
 
 
-# class Appointment(models.Model):
-#     owner = models.CharField(max_length=100)
-#     date = models.DateField(_(""), auto_now=False, auto_now_add=False)
-#     time = models.TimeField()
-#     reason = models.CharField(max_length=200)
+class Appointment(models.Model):
+    owner = models.CharField(max_length=100)
+    date = models.DateField(auto_now=False, auto_now_add=False)
+    time = models.TimeField()
+    reason = models.CharField(max_length=200)
+    finished = models.BooleanField(default=False)
 
-#     vin = models.ForeignKey(
-#         VinVO,
-#         related_name="appointments",
-#         on_delete=models.CASCADE,
-#     )
+    automobile = models.ForeignKey(
+        AutomobileVO,
+        related_name="appointments",
+        on_delete=models.CASCADE,
+    )
 
-#     status = models.ForeignKey(
-#         Status,
-#         related_name="appointments",
-#         on_delete=models.PROTECT,
-#     )
-
-#     class Meta:
-#         ordering = ("date",)
+    class Meta:
+        ordering = ("date",)

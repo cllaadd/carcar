@@ -1,14 +1,16 @@
 from common.json import ModelEncoder
 
-from .models import Technician
+from .models import Technician, Appointment, AutomobileVO
 
 
-# class VinVOEncoder(ModelEncoder):
-#     model = VinVO
-#     properties = [
-#         "id",
-#         "name",
-#     ]
+class AutomobileVOEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = [
+        "vin",
+        "color",
+        "year",
+        "model",
+    ]
 
 
 class TechnicianEncoder(ModelEncoder):
@@ -16,4 +18,14 @@ class TechnicianEncoder(ModelEncoder):
     properties = [
         "id",
         "name",
+    ]
+
+class AppointmentEncoder(ModelEncoder):
+    model = Appointment
+    properties = [
+        "owner",
+        "date",
+        "time",
+        "reason",
+        "automobile",
     ]
