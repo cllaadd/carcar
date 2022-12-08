@@ -49,7 +49,8 @@ def api_appointments(request, auto_vin=None):
         content = json.loads(request.body)
         print("content: ", content)
         try:
-            technician = Technician.objects.get(name=content["technician"])
+            technician = content["technician"]
+            technician = Technician.objects.get(id=content["technician"])
             content["technician"] = technician
 
         except Technician.DoesNotExist:
@@ -58,7 +59,6 @@ def api_appointments(request, auto_vin=None):
                 status=400,
             )
 
-        # serialize('json', Appointment.objects.all())
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
                 appointment,
