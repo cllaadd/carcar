@@ -79,7 +79,7 @@ class AutomobileForm extends React.Component {
                     </div>
                     <div className="form-floating mb-3">
                       <input onChange={this.handleInputChange} value={this.state.vin} placeholder="VIN" required type="text" name="vin" id="vin" className="form-control" />
-                      <label htmlFor="color">VIN</label>
+                      <label htmlFor="vin">VIN</label>
                     </div>
                     <div className="mb-3">
                       <select onChange={this.handleInputChange} required id="model"  name="model" className="form-select">

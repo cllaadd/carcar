@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+// import VinSearch from './VinSearch';
 import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelsList from './ModelsList';
@@ -11,6 +12,11 @@ import SalespersonForm from './SalespersonForm';
 import CustomerForm from './CustomerForm';
 import TechnicianForm from './TechnicianForm';
 import SaleForm from './SaleForm';
+import AppointmentsList from './AppointmentsList';
+import AppointmentForm from './AppointmentForm';
+
+
+
 
 function App() {
   return (
@@ -43,9 +49,22 @@ function App() {
           <Route path="technicians">
             <Route path="new" element={<TechnicianForm />} />
           </Route>
+          <Route path="appointments">
+            <Route path="" element={<AppointmentsList />} />
+          </Route>
+          <Route path="appointments">
+            <Route path="new" element={<AppointmentForm />} />
+          </Route>
+          {/* <Route>
+          <VinSearch
+              searchQuery={vinKey}
+              setSearchQuery={setVinKey}
+            />
+          </Route> */}
         </Routes>
       </div>
     </BrowserRouter>
+
   );
 }
 

@@ -1,5 +1,5 @@
 from common.json import ModelEncoder
-
+import json
 from .models import Technician, Appointment, AutomobileVO
 
 
@@ -25,8 +25,6 @@ class AppointmentEncoder(ModelEncoder):
     properties = [
         "id",
         "owner",
-        # "date",
-        # "time",
         "reason",
         "technician",
         "vin",
@@ -34,3 +32,11 @@ class AppointmentEncoder(ModelEncoder):
     encoders = {
         'technician': TechnicianEncoder(),
     }
+
+    def get_extra_data(self,o):
+        date = json.dumps(o.date, default=str)
+        time = json.dumps(o.time, default=str)
+        date = json.loads(date)
+        time = json.loads(time)
+        return {"date" : date,
+                "time" : time, }
