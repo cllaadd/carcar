@@ -1,12 +1,15 @@
 import React from "react";
 
 class SaleForm extends React.Component{
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state= {
+            automobile: '',
             automobiles: [],
             salespeople: [],
+            salesperson: '',
             customers: [],
+            customer: '',
             price: '',
         }
         this.handleAutomobileChange = this.handleAutomobileChange.bind(this);
@@ -103,7 +106,7 @@ class SaleForm extends React.Component{
                   <h1>Record a new sale</h1>
                   <form onSubmit={this.handleSubmit} id="create-sale-form">
                   <div className="mb-3">
-                      <select onChange={this.handleAutomobileChange} required id="automobile"  name="automobile" className="form-select">
+                      <select onChange={this.handleAutomobileChange} value={this.state.automobile} required id="automobile"  name="automobile" className="form-select" value={this.state.automobile}>
                       <option value="">Choose an automobile</option>
                           {this.state.automobiles?.map(automobile => {
                               return (
@@ -115,19 +118,19 @@ class SaleForm extends React.Component{
                       </select>
                     </div>
                     <div className="mb-3">
-                      <select onChange={this.handleSalespersonChange} required id="salesperson"  name="salesperson" className="form-select">
+                      <select onChange={this.handleSalespersonChange} value={this.state.salesperson} required id="salesperson"  name="salesperson" className="form-select">
                       <option value="">Choose a salesperson</option>
                           {this.state.salespeople?.map(salesperson => {
                               return (
                                   <option key = {salesperson.employee_number} value={salesperson.employee_number}>
-                                      {salesperson.employee_number}
+                                      {salesperson.name}
                                   </option>
                               )
                               })};
                       </select>
                     </div>
                     <div className="mb-3">
-                      <select onChange={this.handleCustomerChange} required id="customer"  name="customer" className="form-select">
+                      <select onChange={this.handleCustomerChange} value={this.state.customer} required id="customer"  name="customer" className="form-select">
                       <option value="">Choose a customer</option>
                           {this.state.customers?.map(customer => {
                               return (

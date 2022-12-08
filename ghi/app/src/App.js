@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-// import VinSearch from './VinSearch';
 import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelsList from './ModelsList';
@@ -12,11 +11,8 @@ import SalespersonForm from './SalespersonForm';
 import CustomerForm from './CustomerForm';
 import TechnicianForm from './TechnicianForm';
 import SaleForm from './SaleForm';
-import AppointmentsList from './AppointmentsList';
 import AppointmentForm from './AppointmentForm';
-
-
-
+import AppointmentsList from './AppointmentsList';
 
 function App() {
   return (

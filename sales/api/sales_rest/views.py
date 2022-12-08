@@ -83,7 +83,6 @@ def api_sales(request, salesperson_employee_number=None):
         print("content", content)
         try:
             automobile = AutomobileVO.objects.get(vin=content["automobile"])
-            print("test", automobile.vin, type(automobile))
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(

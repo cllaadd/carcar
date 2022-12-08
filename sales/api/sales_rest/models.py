@@ -35,6 +35,7 @@ class Sale(models.Model):
 
     automobile = models.ForeignKey(
         AutomobileVO,
+        unique=True,
         related_name = "sales",
         on_delete=models.PROTECT,
     )
