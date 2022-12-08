@@ -51,12 +51,6 @@ function App() {
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />
           </Route>
-          {/* <Route>
-          <VinSearch
-              searchQuery={vinKey}
-              setSearchQuery={setVinKey}
-            />
-          </Route> */}
         </Routes>
       </div>
     </BrowserRouter>

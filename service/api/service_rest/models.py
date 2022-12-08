@@ -28,6 +28,7 @@ class Appointment(models.Model):
     time = models.TimeField()
     reason = models.CharField(max_length=200)
     finished = models.BooleanField(default=False)
+    vip = models.BooleanField(default=False)
     vin = models.CharField(max_length=17)
 
     technician = models.ForeignKey(

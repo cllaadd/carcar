@@ -28,6 +28,8 @@ class AppointmentEncoder(ModelEncoder):
         "reason",
         "technician",
         "vin",
+        "finished",
+        "vip",
     ]
     encoders = {
         'technician': TechnicianEncoder(),
