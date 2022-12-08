@@ -14,31 +14,18 @@ class SaleHistory extends React.Component{
     async handleSalespersonChange(event) {
         const value = event.target.value;
         this.setState({salesperson: value})
-        // function tbody() {
-        //     render()
-        //     for (let sale of this.state.sales) {
-        //         if (sale.salesperson.name === this.state.salesperson.name) {
-        //             render()
-        //                 return(
-        //                     <tr key={sale.automobile.vin}>
-        //                         <td>{sale.salesperson.name}</td>
-        //                         <td>{sale.customer.name}</td>
-        //                         <td>{sale.automobile.vin}</td>
-        //                         <td>{sale.price}</td>
-        //                     </tr>
-        //                 )
-        //         }
-        //     }}
         }
 
-    async componentDidUpdate() {
-        const salesperson = this.state.salesperson
-        const url = `http://localhost:8090/api/sales/${salesperson}`
-        const response = await fetch(url);
+    async componentDidUpdate(prevProps,prevState) {
+        if (prevState.salesperson !== this.state.salesperson){
+            const salesperson = this.state.salesperson
+            const url = `http://localhost:8090/api/sales/${salesperson}`
+            const response = await fetch(url);
 
-        if (response.ok) {
-            const data = await response.json();
-            this.setState({sales: data.sales})
+            if (response.ok) {
+                const data = await response.json();
+                this.setState({sales: data.sales})
+            }
         }
     }
 
@@ -49,7 +36,6 @@ class SaleHistory extends React.Component{
 
         if (salesResponse.ok) {
             const data = await salesResponse.json();
-            console.log("line41", data.sales, typeof data.sales)
             this.setState({sales: data.sales})
         }
 
@@ -100,27 +86,6 @@ class SaleHistory extends React.Component{
                             </tr>
                         );
                     })}
-                        {/* {tbody()} */}
-                        {/* {this.state.sales.filter(sale => sale.salesperson.name === this.state.salesperson.name).map(filteredSale => {
-                            return(
-                                <tr key={filteredSale.automobile.vin}>
-                                    <td>{filteredSale.salesperson.name}</td>
-                                    <td>{filteredSale.customer.name}</td>
-                                    <td>{filteredSale.automobile.vin}</td>
-                                    <td>{filteredSale.price}</td>
-                                </tr>
-                            );
-                        })} */}
-                        {/* {this.state.sales.map(sale => sale.filter(sale => sale.salesperson.name === this.state.salesperson.name).map(filteredSale => {
-                            return(
-                                <tr key={filteredSale.automobile.vin}>
-                                    <td>{filteredSale.salesperson.name}</td>
-                                    <td>{filteredSale.customer.name}</td>
-                                    <td>{filteredSale.automobile.vin}</td>
-                                    <td>{filteredSale.price}</td>
-                                </tr>
-                            );
-                        }))} */}
                     </tbody>
                 </table>
             </div>

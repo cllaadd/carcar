@@ -7,7 +7,6 @@ function ModelsList() {
     const getData = async() => {
         const response = await fetch('http://localhost:8100/api/models/')
         const data = await response.json()
-        console.log(data)
         setModels(data.models)
     }
 

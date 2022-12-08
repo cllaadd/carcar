@@ -7,7 +7,6 @@ function ManufacturersList() {
     const getData = async() => {
         const response = await fetch('http://localhost:8100/api/manufacturers/')
         const data = await response.json()
-        console.log(data)
         setManufacturers(data.manufacturers)
     }
 

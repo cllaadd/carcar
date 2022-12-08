@@ -106,7 +106,7 @@ class SaleForm extends React.Component{
                   <h1>Record a new sale</h1>
                   <form onSubmit={this.handleSubmit} id="create-sale-form">
                   <div className="mb-3">
-                      <select onChange={this.handleAutomobileChange} value={this.state.automobile} required id="automobile"  name="automobile" className="form-select" value={this.state.automobile}>
+                      <select onChange={this.handleAutomobileChange} value={this.state.automobile} required id="automobile"  name="automobile" className="form-select">
                       <option value="">Choose an automobile</option>
                           {this.state.automobiles?.map(automobile => {
                               return (
