@@ -6,12 +6,12 @@ class SaleHistory extends React.Component{
         this.state= {
             salespeople: [],
             salesperson: '',
-            sales: '',
+            sales: [],
         }
         this.handleSalespersonChange = this.handleSalespersonChange.bind(this);
     }
 
-    handleSalespersonChange(event) {
+    async handleSalespersonChange(event) {
         const value = event.target.value;
         this.setState({salesperson: value})
         // function tbody() {
@@ -30,6 +30,17 @@ class SaleHistory extends React.Component{
         //         }
         //     }}
         }
+
+    async componentDidUpdate() {
+        const salesperson = this.state.salesperson
+        const url = `http://localhost:8090/api/sales/${salesperson}`
+        const response = await fetch(url);
+
+        if (response.ok) {
+            const data = await response.json();
+            this.setState({sales: data.sales})
+        }
+    }
 
 
     async componentDidMount() {
@@ -79,6 +90,16 @@ class SaleHistory extends React.Component{
                         </tr>
                     </thead>
                     <tbody>
+                    {this.state.sales.map(sale => {
+                        return(
+                            <tr key={sale.automobile.vin}>
+                                <td>{sale.salesperson.name}</td>
+                                <td>{sale.customer.name}</td>
+                                <td>{sale.automobile.vin}</td>
+                                <td>{sale.price}</td>
+                            </tr>
+                        );
+                    })}
                         {/* {tbody()} */}
                         {/* {this.state.sales.filter(sale => sale.salesperson.name === this.state.salesperson.name).map(filteredSale => {
                             return(
@@ -90,7 +111,7 @@ class SaleHistory extends React.Component{
                                 </tr>
                             );
                         })} */}
-                        {this.state.sales.map(sale => sale.filter(sale => sale.salesperson.name === this.state.salesperson.name).map(filteredSale => {
+                        {/* {this.state.sales.map(sale => sale.filter(sale => sale.salesperson.name === this.state.salesperson.name).map(filteredSale => {
                             return(
                                 <tr key={filteredSale.automobile.vin}>
                                     <td>{filteredSale.salesperson.name}</td>
@@ -99,7 +120,7 @@ class SaleHistory extends React.Component{
                                     <td>{filteredSale.price}</td>
                                 </tr>
                             );
-                        }))}
+                        }))} */}
                     </tbody>
                 </table>
             </div>
