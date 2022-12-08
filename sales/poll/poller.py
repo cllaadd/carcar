@@ -25,7 +25,6 @@ def poll():
         print('Sales poller polling for data')
         try:
             get_automobiles()
-            pass
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)
