@@ -40,5 +40,11 @@ class Appointment(models.Model):
     def __str__(self):
         return f"{self.vin}"
 
+    def set_finished_true(self):
+        self.finished = True
+
+    def set_vip_true(self):
+        self.vip = True
+
     class Meta:
         ordering = ("date",)

@@ -7,9 +7,7 @@ class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
         "vin",
-        "color",
-        "year",
-        "model",
+        "import_href",
     ]
 
 

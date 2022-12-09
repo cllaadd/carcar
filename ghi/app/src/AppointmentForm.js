@@ -1,25 +1,19 @@
 import React from "react";
 
 class AppointmentForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state= {
-            owner: '',
-            vin: '',
-            date: '',
-            time: '',
-            reason: '',
-            technician: '',
-            technicians: [],
+    state = {
+        owner: '',
+        vin: '',
+        date: '',
+        time: '',
+        reason: '',
+        technician: '',
+        technicians: [],
 
-        }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleTechnicianChange = this.handleTechnicianChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    async handleSubmit(event) {
+
+    handleSubmit = async(event) => {
         event.preventDefault();
         const data = {...this.state};
         console.log(data)
@@ -50,18 +44,18 @@ class AppointmentForm extends React.Component {
         }
     }
 
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         const value = event.target.value;
         this.setState({[event.target.id]: value})
     }
 
-    handleTechnicianChange(event) {
+    handleTechnicianChange= (event) => {
       const value = event.target.value;
       this.setState({technician: value})
   }
 
 
-    async componentDidMount() {
+    componentDidMount = async() => {
         const url = 'http://localhost:8080/api/technicians/';
 
         const response = await fetch(url);
