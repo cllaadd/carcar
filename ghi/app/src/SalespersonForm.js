@@ -1,21 +1,14 @@
 import React from "react";
 
 class SalespersonForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            name: '',
-            employeeNumber: ''
-        }
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleEmployeeNumberChange = this.handleEmployeeNumberChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state = {
+        name: '',
+        employeeNumber: ''
     }
 
-    async handleSubmit(event) {
+    handleSubmit = async(event) => {
         event.preventDefault();
         const data = {...this.state};
-        console.log(data)
         data["employee_number"] = data.employeeNumber
         delete data.employeeNumber
 
@@ -27,6 +20,7 @@ class SalespersonForm extends React.Component {
                 'Content-Type': 'application/json',
             },
         };
+
         const response = await fetch(salespersonUrl, fetchConfig);
         if (response.ok) {
             const newSalesperson = await response.json();
@@ -39,12 +33,12 @@ class SalespersonForm extends React.Component {
         }
     }
 
-    handleNameChange(event) {
+    handleNameChange = (event) => {
         const value = event.target.value;
         this.setState({name: value})
     }
 
-    handleEmployeeNumberChange(event) {
+    handleEmployeeNumberChange = (event) => {
         const value = event.target.value;
         this.setState({employeeNumber: value})
     }

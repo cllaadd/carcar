@@ -1,25 +1,17 @@
 import React from "react";
 
 class SaleForm extends React.Component{
-    constructor() {
-        super()
-        this.state= {
-            automobile: '',
-            automobiles: [],
-            salespeople: [],
-            salesperson: '',
-            customers: [],
-            customer: '',
-            price: '',
-        }
-        this.handleAutomobileChange = this.handleAutomobileChange.bind(this);
-        this.handleSalespersonChange = this.handleSalespersonChange.bind(this);
-        this.handleCustomerChange = this.handleCustomerChange.bind(this);
-        this.handlePriceChange = this.handlePriceChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state= {
+        automobile: '',
+        automobiles: [],
+        salespeople: [],
+        salesperson: '',
+        customers: [],
+        customer: '',
+        price: '',
     }
 
-    async handleSubmit(event) {
+    handleSubmit = async(event) => {
         event.preventDefault();
         const data = {...this.state};
         data["price"] = data.price
@@ -37,7 +29,7 @@ class SaleForm extends React.Component{
             },
         };
         const response = await fetch(saleUrl, fetchConfig);
-        console.log(response)
+
         if (response.ok) {
             const newSale = await response.json();
 
@@ -51,27 +43,27 @@ class SaleForm extends React.Component{
         }
     }
 
-    handleAutomobileChange(event) {
+    handleAutomobileChange = (event) => {
         const value = event.target.value;
         this.setState({automobile: value})
     }
 
-    handleSalespersonChange(event) {
+    handleSalespersonChange = (event) => {
         const value = event.target.value;
         this.setState({salesperson: value})
     }
 
-    handleCustomerChange(event) {
+    handleCustomerChange = (event) => {
         const value = event.target.value;
         this.setState({customer: value})
     }
 
-    handlePriceChange(event) {
+    handlePriceChange = (event) => {
         const value = event.target.value;
         this.setState({price: value})
     }
 
-    async componentDidMount() {
+    componentDidMount = async() => {
         const automobileUrl = 'http://localhost:8100/api/automobiles/';
         const automobileResponse = await fetch(automobileUrl);
 
@@ -108,37 +100,37 @@ class SaleForm extends React.Component{
                   <div className="mb-3">
                       <select onChange={this.handleAutomobileChange} value={this.state.automobile} required id="automobile"  name="automobile" className="form-select">
                       <option value="">Choose an automobile</option>
-                          {this.state.automobiles?.map(automobile => {
-                              return (
-                                  <option key = {automobile.vin} value={automobile.vin}>
-                                      {automobile.vin}
-                                  </option>
-                              )
-                              })};
+                        {this.state.automobiles?.map(automobile => {
+                            return (
+                                <option key = {automobile.vin} value={automobile.vin}>
+                                    {automobile.vin}
+                                </option>
+                            )
+                        })};
                       </select>
                     </div>
                     <div className="mb-3">
                       <select onChange={this.handleSalespersonChange} value={this.state.salesperson} required id="salesperson"  name="salesperson" className="form-select">
                       <option value="">Choose a salesperson</option>
-                          {this.state.salespeople?.map(salesperson => {
-                              return (
-                                  <option key = {salesperson.employee_number} value={salesperson.employee_number}>
-                                      {salesperson.name}
-                                  </option>
-                              )
-                              })};
+                        {this.state.salespeople?.map(salesperson => {
+                            return (
+                                <option key = {salesperson.employee_number} value={salesperson.employee_number}>
+                                    {salesperson.name}
+                                </option>
+                            )
+                        })};
                       </select>
                     </div>
                     <div className="mb-3">
                       <select onChange={this.handleCustomerChange} value={this.state.customer} required id="customer"  name="customer" className="form-select">
                       <option value="">Choose a customer</option>
-                          {this.state.customers?.map(customer => {
-                              return (
-                                  <option key = {customer.name} value={customer.name}>
-                                      {customer.name}
-                                  </option>
-                              )
-                              })};
+                        {this.state.customers?.map(customer => {
+                            return (
+                                <option key = {customer.name} value={customer.name}>
+                                    {customer.name}
+                                </option>
+                            )
+                        })};
                       </select>
                     </div>
                     <div className="form-floating mb-3">
