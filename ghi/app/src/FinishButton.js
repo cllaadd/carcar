@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const FinishButton = (props) => {
 
     const [finish, setFinish] = useState(false);
-    const { unfinished } = props;
 
     const onClick = (e) => {
 

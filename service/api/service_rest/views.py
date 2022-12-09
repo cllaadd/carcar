@@ -88,7 +88,6 @@ def api_appointments(request, auto_vin=None):
         )
     else:
         content = json.loads(request.body)
-        print("content: ", content)
         try:
             technician = content["technician"]
             technician = Technician.objects.get(id=content["technician"])
@@ -132,17 +131,8 @@ def api_appointment(request, id):
             )
         except Appointment.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else:
+    else: #PUT
         content = json.loads(request.body)
-        try:
-            technician = content["technician"]
-            technician = Technician.objects.get(id=content["technician"])
-            content["technician"] = technician
-        except Technician.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid technician"},
-                status=400,
-            )
         Appointment.objects.filter(id=id).update(**content)
         appointment = Appointment.objects.get(id=id)
         return JsonResponse(

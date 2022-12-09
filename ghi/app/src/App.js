@@ -12,7 +12,7 @@ import CustomerForm from './CustomerForm';
 import TechnicianForm from './TechnicianForm';
 import SaleForm from './SaleForm';
 import AppointmentForm from './AppointmentForm';
-import AppointmentsList from './AppointmentsList';
+import TestAppointmentsList from './TestAppointmentsList';
 import SaleHistory from './SaleHistory';
 import SaleList from './SaleList';
 
@@ -50,7 +50,7 @@ function App() {
             <Route path="new" element={<TechnicianForm />} />
           </Route>
           <Route path="appointments">
-            <Route path="" element={<AppointmentsList />} />
+            <Route path="" element={<TestAppointmentsList />} />
           </Route>
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />

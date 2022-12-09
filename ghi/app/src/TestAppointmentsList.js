@@ -1,68 +1,69 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import SearchVIN from "./SearchVIN";
 
-function TestAppointmentsList() {
+function AppointmentsList() {
     const [appointments, setAppointments] = useState([])
+    const [filterValue, setFilter] = useState("");
+
+    const handleChange = (e) => {
+        setFilter(e.target.value);
+      };
 
 
     const getData = async() => {
-        const response = await fetch('http://localhost:8080/api/appointments/')
+        const response = await fetch('http://localhost:8080/api/appointments/filtered/')
         const data = await response.json()
         setAppointments(data.appointments)
     }
 
-    const finishAppointment = async(id) => {
-        const finished = "{finished : True}"
-        const fetchConfig = {
-                method: 'put',
-                body: JSON.stringify(finished),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
-        const appointmentsResponse = await fetch(`http://localhost:8080/api/appointments/${id}/`, fetchConfig)
+    let filteredAppointments = [];
+    if (filterValue === "") {
+    filteredAppointments = appointments;
+    } else {
+    filteredAppointments = appointments.filter((appointment) =>
+      appointment.vin === filterValue
+    );
+    }
 
-        if (appointmentsResponse.ok) {
-            const data = await appointmentsResponse.json();
-            this.setState({"appointments": data.appointments})
-        }
-
-    const componentDidUpdate = async(id) => {
-        const response = await fetch(`http://localhost:8080/api/appointments/${id}/`, {method:"DELETE"})
+    const handleDelete = async(id) => {
+        const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, {method:"DELETE"})
         const data = await response.json()
         console.log(data)
         getData();
         window.location = "/appointments"
     }
 
-    // const handleFinish = async(id) => {
-    //     const response = await fetch(`http://localhost:8080/api/appointments/${id}/`, {method:"PUT"})
-    //     const data = await response.json();
-    //     console.log(data)
-    //     getData();
-    //     window.location = "/appointments"
-    // }
-
-    // const searchVIN = async(vin) => {
-    //     const response = await fetch(`http://localhost:8080/api/appointments/${vin}/`, {method:"GET"})
-    //     const data = await response.json();
-    //     console.log(data)
-    //     getData();
-    //     window.location = "/appointments"
-    // }
+    const handleFinish = async(id) => {
+        const status = {finished : true}
+        const fetchConfig = {
+            method: 'put',
+            body: JSON.stringify(status),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, fetchConfig)
+        const data = await response.json();
+        console.log(data)
+        getData();
+        window.location = "/appointments"
+    }
 
     useEffect(()=> {
         getData();
     }, []
     )
 
-}
+
 
     return (
         <div>
-            <div className="mb-3">
-                <input placeholder="Car VIN" required type="text" name="vin" id="vin" className="form-control" />
-                <button className="btn btn-outline-secondary" onSubmit= {searchVIN}>Search</button>
+            <div>
+              <SearchVIN
+                filterValue={filterValue}
+                handleChange={handleChange}
+              />
             </div>
             <h1>Appointments</h1>
             <table className="table table-striped">
@@ -79,7 +80,7 @@ function TestAppointmentsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map(appointment => {
+                    {filteredAppointments.map(appointment => {
                         return(
                             <tr key={appointment.id}>
                                 <td>{appointment.vin}</td>
@@ -89,10 +90,10 @@ function TestAppointmentsList() {
                                 <td>{appointment.technician.name}</td>
                                 <td>{appointment.reason}</td>
                                 <td>
-                                <button className="btn btn-success m-2" onClick={()=> {finishAppointment(appointment.id)}}>Finish</button>
+                                <button className="btn btn-success m-2" onClick={()=> {handleFinish(appointment.id)}}>Finish</button>
                                 </td>
                                 <td>
-                                <button className="btn btn-danger m-2" onClick={()=> {componentDidUpdate(appointment.id)}}>Cancel</button>
+                                <button className="btn btn-danger m-2" onClick={()=> {handleDelete(appointment.id)}}>Cancel</button>
                                 </td>
                             </tr>
                         );
@@ -104,4 +105,4 @@ function TestAppointmentsList() {
     )
 }
 
-export default TestAppointmentsList;
+export default AppointmentsList;

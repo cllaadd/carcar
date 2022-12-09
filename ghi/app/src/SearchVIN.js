@@ -1,17 +1,11 @@
+const SearchVIN = (props) => {
+    const { filterValue, handleChange} = props;
 
-function SearchVIN() {
+    return (
+      <>
+        <input value={filterValue} onChange={handleChange} placeholder="VIN"/>
+      </>
+    );
+  };
 
-    const searchVIN = async(vin) => {
-        const response = await fetch(`http://localhost:8080/api/appointments/${vin}/`, {method:"GET"})
-        const data = await response.json();
-        console.log(data)
-        getData();
-        window.location = "/appointments"
-    }
-
-    useEffect(()=> {
-        getData();
-    }, []
-    )
-
-}
+  export default SearchVIN;
