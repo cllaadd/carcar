@@ -41,4 +41,4 @@ class AppointmentEncoder(ModelEncoder):
         date = json.loads(date)
         time = json.loads(time)
         return {"date" : date,
-                "time" : time, }
+                "time" : time,}

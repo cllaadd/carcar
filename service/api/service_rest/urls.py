@@ -17,4 +17,4 @@ urlpatterns = [
         api_appointment,
         name="api_appointment",
     ),
-    ]
+]

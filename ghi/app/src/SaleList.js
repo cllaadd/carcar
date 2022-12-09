@@ -6,7 +6,6 @@ function SaleList() {
     const getData = async() => {
         const response = await fetch('http://localhost:8090/api/sales/')
         const data = await response.json()
-        console.log(data)
         setSales(data.sales)
     }
 

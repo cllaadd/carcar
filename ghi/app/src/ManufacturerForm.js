@@ -1,20 +1,13 @@
 import React from "react";
 
 class ManufacturerForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state= {
-            name: '',
-        }
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state= {
+        name: '',
     }
 
-    async handleSubmit(event) {
+    handleSubmit = async (event) => {
         event.preventDefault();
         const data = {...this.state};
-
 
         const manufacturerUrl = `http://localhost:8100/api/manufacturers/`;
         const fetchConfig = {
@@ -27,7 +20,6 @@ class ManufacturerForm extends React.Component {
         const response = await fetch(manufacturerUrl, fetchConfig);
         if (response.ok) {
             const newManufacturer = await response.json();
-            console.log(newManufacturer);
 
             const cleared = {
                 name: '',
@@ -36,7 +28,7 @@ class ManufacturerForm extends React.Component {
         }
     }
 
-    handleInputChange(event) {
+    handleInputChange = async(event) => {
         const value = event.target.value;
         this.setState({[event.target.id]: value})
     }
@@ -60,7 +52,6 @@ class ManufacturerForm extends React.Component {
             </div>
         );
     }
-
 }
 
 export default ManufacturerForm

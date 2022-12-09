@@ -1,26 +1,20 @@
 import React from "react";
 
 class ModelForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state= {
-            name: '',
-            pictureUrl: '',
-            manufacturer: [],
-            //allows manufacturer to exist as an object and a string
-            manufacturer: '',
-        }
-        this.handlePictureUrlChange = this.handlePictureUrlChange.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleManufacturerChange = this.handleManufacturerChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state= {
+        name: '',
+        pictureUrl: '',
+        manufacturer: [],
+        //allows manufacturer to exist as an object and a string
+        manufacturer: '',
     }
 
-    async handleSubmit(event) {
+    handleSubmit = async(event) => {
         event.preventDefault();
         const data = {...this.state};
         // resolves manufacturer as a string to make manufacturer be the number of manufacturer_id
         data["manufacturer_id"] = data.manufacturer
+        data.picture_url=data.pictureUrl
         delete data.pictureUrl;
         delete data.manufacturers;
 
@@ -33,10 +27,9 @@ class ModelForm extends React.Component {
             },
         };
         const response = await fetch(modelUrl, fetchConfig);
-        console.log(response)
+
         if (response.ok) {
             const newModel = await response.json();
-            console.log(newModel);
 
             const cleared = {
                 name: '',
@@ -47,22 +40,22 @@ class ModelForm extends React.Component {
         }
     }
 
-    handleManufacturerChange(event) {
+    handleManufacturerChange = (event) => {
         const value = event.target.value;
         this.setState({manufacturer: value})
     }
 
-    handleNameChange(event) {
+    handleNameChange = (event) => {
         const value = event.target.value;
         this.setState({name: value})
     }
 
-    handlePictureUrlChange(event) {
+    handlePictureUrlChange = (event) => {
         const value = event.target.value;
         this.setState({pictureUrl: value})
     }
 
-    async componentDidMount() {
+    componentDidMount = async() => {
         const url = 'http://localhost:8100/api/manufacturers/';
 
         const response = await fetch(url);
@@ -85,19 +78,19 @@ class ModelForm extends React.Component {
                       <label htmlFor="name">Name</label>
                     </div>
                     <div className="form-floating mb-3">
-                      <input onChange={this.handlePictureUrlChange} value={this.state.pictureUrl} placeholder="Picture URL" required type="url" name="picture_url" id="picture_url" className="form-control" />
+                      <input onChange={this.handlePictureUrlChange} value={this.state.pictureUrl} placeholder="Picture URL" required type="text" name="picture_url" id="picture_url" className="form-control" />
                       <label htmlFor="picture_url">Picture URL</label>
                     </div>
                     <div className="mb-3">
                       <select onChange={this.handleManufacturerChange} required id="manufacturer"  name="manufacturer" className="form-select">
                       <option value="">Choose a manufacturer</option>
-                          {this.state.manufacturers?.map(manufacturer => {
-                              return (
-                                  <option key = {manufacturer.id} value={manufacturer.id}>
-                                      {manufacturer.name}
-                                  </option>
-                              )
-                              })};
+                        {this.state.manufacturers?.map(manufacturer => {
+                            return (
+                                <option key = {manufacturer.id} value={manufacturer.id}>
+                                    {manufacturer.name}
+                                </option>
+                            )
+                        })};
                       </select>
                     </div>
                     <button className="btn btn-primary">Create</button>
@@ -107,7 +100,6 @@ class ModelForm extends React.Component {
             </div>
         );
     }
-
 }
 
 export default ModelForm

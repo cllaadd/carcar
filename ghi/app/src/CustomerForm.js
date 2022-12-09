@@ -1,23 +1,15 @@
 import React from "react";
 
 class CustomerForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            name: '',
-            address: '',
-            phone: '',
-        }
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleAddressChange = this.handleAddressChange.bind(this);
-        this.handlePhoneChange = this.handlePhoneChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    state = {
+        name: '',
+        address: '',
+        phone: '',
     }
 
-    async handleSubmit(event) {
+    handleSubmit = async(event) => {
         event.preventDefault();
         const data = {...this.state};
-        console.log(data)
 
         const customerUrl = 'http://localhost:8090/api/customers/';
         const fetchConfig = {
@@ -40,17 +32,17 @@ class CustomerForm extends React.Component {
         }
     }
 
-    handleNameChange(event) {
+    handleNameChange = (event) => {
         const value = event.target.value;
         this.setState({name: value})
     }
 
-    handleAddressChange(event) {
+    handleAddressChange = (event) => {
         const value = event.target.value;
         this.setState({address: value})
     }
 
-    handlePhoneChange(event) {
+    handlePhoneChange =(event) => {
         const value = event.target.value;
         this.setState({phone: value})
     }
