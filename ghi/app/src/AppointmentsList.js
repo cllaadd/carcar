@@ -56,7 +56,7 @@ function AppointmentsList() {
     return (
         <div>
             <div>
-                <input value={filterValue} onChange={handleChange} placeholder="VIN"/>
+                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search VIN"/>
             </div>
             <h1>Appointments</h1>
             <table className="table table-striped">
