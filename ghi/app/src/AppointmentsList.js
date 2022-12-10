@@ -3,7 +3,11 @@ import { NavLink } from "react-router-dom";
 
 function AppointmentsList() {
     const [appointments, setAppointments] = useState([])
+    const [filterValue, setFilter] = useState("");
 
+    const handleChange = (e) => {
+        setFilter(e.target.value);
+      };
 
     const getData = async() => {
         const response = await fetch('http://localhost:8080/api/appointments/filtered/')
@@ -11,11 +15,18 @@ function AppointmentsList() {
         setAppointments(data.appointments)
     }
 
+    let filteredAppointments = [];
+    if (filterValue === "") {
+    filteredAppointments = appointments;
+    } else {
+    filteredAppointments = appointments.filter((appointment) =>
+      appointment.vin === filterValue
+    );
+    }
 
     const handleDelete = async(id) => {
         const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, {method:"DELETE"})
-        const data = await response.json()
-        console.log(data)
+        const data = await response.json();
         getData();
         window.location = "/appointments"
     }
@@ -31,7 +42,6 @@ function AppointmentsList() {
         };
         const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, fetchConfig)
         const data = await response.json();
-        console.log(data)
         getData();
         window.location = "/appointments"
     }
@@ -45,11 +55,15 @@ function AppointmentsList() {
 
     return (
         <div>
+            <div>
+                <input value={filterValue} onChange={handleChange} placeholder="VIN"/>
+            </div>
             <h1>Appointments</h1>
             <table className="table table-striped">
                 <thead>
                     <tr>
                         <th>VIN</th>
+                        <th>VIP</th>
                         <th>Owner</th>
                         <th>Date</th>
                         <th>Time</th>
@@ -60,10 +74,11 @@ function AppointmentsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {appointments.map(appointment => {
+                    {filteredAppointments.map(appointment => {
                         return(
                             <tr key={appointment.id}>
                                 <td>{appointment.vin}</td>
+                                <td>{appointment.vip.toString()}</td>
                                 <td>{appointment.owner}</td>
                                 <td>{appointment.date}</td>
                                 <td>{appointment.time}</td>

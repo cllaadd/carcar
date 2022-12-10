@@ -86,7 +86,7 @@ def api_appointments(request, auto_vin=None):
             {"appointments": appointments},
             encoder=AppointmentEncoder,
         )
-    else:
+    else: #POST
         content = json.loads(request.body)
         try:
             technician = content["technician"]
@@ -98,7 +98,11 @@ def api_appointments(request, auto_vin=None):
                 {"message": "Invalid technician"},
                 status=404,
             )
-
+        app_vin = content["vin"]
+        autos = AutomobileVO.objects.all()
+        auto_vins = [auto.vin for auto in autos]
+        if app_vin in auto_vins:
+            content["vip"] = True
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
                 appointment,

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import TestNav from './TestNav';
 import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelsList from './ModelsList';
@@ -12,14 +13,15 @@ import CustomerForm from './CustomerForm';
 import TechnicianForm from './TechnicianForm';
 import SaleForm from './SaleForm';
 import AppointmentForm from './AppointmentForm';
-import TestAppointmentsList from './TestAppointmentsList';
+import AppointmentsList from './AppointmentsList';
+// import TestAppointmentsList from './TestAppointmentsList';
 import SaleHistory from './SaleHistory';
 import SaleList from './SaleList';
 
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
+      <TestNav />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -50,11 +52,14 @@ function App() {
             <Route path="new" element={<TechnicianForm />} />
           </Route>
           <Route path="appointments">
-            <Route path="" element={<TestAppointmentsList />} />
+            <Route path="" element={<AppointmentsList />} />
           </Route>
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />
           </Route>
+          {/* <Route path="testappointments">
+            <Route path="new" element={<TestAppointmentsList />} />
+          </Route> */}
         </Routes>
       </div>
     </BrowserRouter>

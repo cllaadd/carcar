@@ -45,7 +45,7 @@ class AppointmentForm extends React.Component {
         this.setState({[event.target.id]: value})
     }
 
-    handleTechnicianChange(event) {
+    handleTechnicianChange = (event) => {
       const value = event.target.value;
       this.setState({technician: value})
     }
