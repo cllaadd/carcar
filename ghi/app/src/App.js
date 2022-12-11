@@ -14,7 +14,6 @@ import TechnicianForm from './TechnicianForm';
 import SaleForm from './SaleForm';
 import AppointmentForm from './AppointmentForm';
 import AppointmentsList from './AppointmentsList';
-// import TestAppointmentsList from './TestAppointmentsList';
 import SaleHistory from './SaleHistory';
 import SaleList from './SaleList';
 
