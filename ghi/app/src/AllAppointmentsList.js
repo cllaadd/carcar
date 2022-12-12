@@ -4,15 +4,7 @@ import { NavLink } from "react-router-dom";
 function AllAppointmentsList() {
     const [appointments, setAppointments] = useState([])
     const [filterValue, setFilter] = useState("");
-    const [filterField, setFilterField] = useState("VIN");
 
-    const handleChange = (e) => {
-        setFilter(e.target.value);
-      };
-
-    const handleFieldChange = (e) => {
-        setFilterField(e.target.value);
-      };
 
     const getData = async() => {
         const response = await fetch('http://localhost:8080/api/appointments')
@@ -20,13 +12,18 @@ function AllAppointmentsList() {
         setAppointments(data.appointments)
     }
 
-    let filteredList = [];
+    const handleChange = (event) => {
+        setFilter(event.target.value);
+      };
+
+
+    let filteredAppointments = [];
     if (filterValue === "") {
-      filteredList = appointments;
+    filteredAppointments = appointments;
     } else {
-      filteredList = appointments.filter((appointment) =>
-        appointment[filterField].includes(filterValue)
-      );
+    filteredAppointments = appointments.filter((appointment) =>
+    appointment.vin === filterValue
+    );
     }
 
     useEffect(()=> {
@@ -39,12 +36,7 @@ function AllAppointmentsList() {
     return (
         <div>
             <div>
-                <select onChange={handleFieldChange}>
-                    <option>VIN</option>
-                    <option>date</option>
-                    <option>reason</option>
-                </select>
-                <input value={filterValue} onChange={handleChange}/>
+                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search VIN"/>
             </div>
             <h1>Appointments</h1>
             <table className="table table-striped">
@@ -62,7 +54,7 @@ function AllAppointmentsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredList.map(appointment => {
+                    {filteredAppointments.map(appointment => {
                         return(
                             <tr key={appointment.id}>
                                 <td>{appointment.vin}</td>
@@ -79,7 +71,6 @@ function AllAppointmentsList() {
                     })}
                 </tbody>
             </table>
-            <NavLink className="btn btn-primary" id="new-appointment-link" aria-current="page" to="new">New appointment</NavLink>
         </div>
     )
 }

@@ -5,15 +5,18 @@ function AppointmentsList() {
     const [appointments, setAppointments] = useState([])
     const [filterValue, setFilter] = useState("");
 
-    const handleChange = (e) => {
-        setFilter(e.target.value);
+
+    const handleChange = (event) => {
+        setFilter(event.target.value);
       };
+
 
     const getData = async() => {
         const response = await fetch('http://localhost:8080/api/appointments/filtered/')
         const data = await response.json()
         setAppointments(data.appointments)
     }
+
 
     let filteredAppointments = [];
     if (filterValue === "") {
@@ -23,6 +26,7 @@ function AppointmentsList() {
       appointment.vin === filterValue
     );
     }
+
 
     const handleDelete = async(id) => {
         const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, {method:"DELETE"})
@@ -50,7 +54,6 @@ function AppointmentsList() {
         getData();
     }, []
     )
-
 
 
     return (

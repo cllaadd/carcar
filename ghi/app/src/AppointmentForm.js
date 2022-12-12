@@ -35,6 +35,7 @@ class AppointmentForm extends React.Component {
               time: '',
               reason: '',
               technician: '',
+              technicians: [],
             };
             this.setState(cleared);
         }
