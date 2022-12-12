@@ -33,6 +33,7 @@ class ModelForm extends React.Component {
                 name: '',
                 pictureUrl: '',
                 manufacturer: '',
+                manufacturer: [],
             };
             this.setState(cleared);
         }
