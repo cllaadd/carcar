@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
+import TestNav from './TestNav';
 import ManufacturersList from './ManufacturersList';
 import ManufacturerForm from './ManufacturerForm';
 import ModelsList from './ModelsList';
@@ -19,7 +20,7 @@ import SaleList from './SaleList';
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
+      <TestNav />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -55,6 +56,9 @@ function App() {
           <Route path="appointments">
             <Route path="new" element={<AppointmentForm />} />
           </Route>
+          {/* <Route path="testappointments">
+            <Route path="new" element={<TestAppointmentsList />} />
+          </Route> */}
         </Routes>
       </div>
     </BrowserRouter>
