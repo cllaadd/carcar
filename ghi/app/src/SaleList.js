@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 function SaleList() {
     const [sales, setSales] = useState([])
 
-    const getData = async() => {
+    const getData = async () => {
         const response = await fetch('http://localhost:8090/api/sales/')
         const data = await response.json()
         setSales(data.sales)
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData();
     }, []
     )
@@ -28,7 +28,7 @@ function SaleList() {
                 </thead>
                 <tbody>
                     {sales?.map(sale => {
-                        return(
+                        return (
                             <tr key={sale.automobile.vin}>
                                 <td>{sale.salesperson.name}</td>
                                 <td>{sale.customer.name}</td>

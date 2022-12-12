@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 function AutomobilesList() {
     const [automobiles, setAutomobiles] = useState([])
 
-    const getData = async() => {
+    const getData = async () => {
         const response = await fetch('http://localhost:8100/api/automobiles/')
         const data = await response.json()
         setAutomobiles(data.autos)
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData();
     }, []
     )
@@ -30,7 +30,7 @@ function AutomobilesList() {
                 </thead>
                 <tbody>
                     {automobiles?.map(automobile => {
-                        return(
+                        return (
                             <tr key={automobile.vin}>
                                 <td>{automobile.vin}</td>
                                 <td>{automobile.color}</td>

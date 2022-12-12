@@ -6,7 +6,7 @@ function AllAppointmentsList() {
     const [filterValue, setFilter] = useState("");
 
 
-    const getData = async() => {
+    const getData = async () => {
         const response = await fetch('http://localhost:8080/api/appointments')
         const data = await response.json()
         setAppointments(data.appointments)
@@ -14,19 +14,19 @@ function AllAppointmentsList() {
 
     const handleChange = (event) => {
         setFilter(event.target.value);
-      };
+    };
 
 
     let filteredAppointments = [];
     if (filterValue === "") {
-    filteredAppointments = appointments;
+        filteredAppointments = appointments;
     } else {
-    filteredAppointments = appointments.filter((appointment) =>
-    appointment.vin === filterValue
-    );
+        filteredAppointments = appointments.filter((appointment) =>
+            appointment.vin === filterValue
+        );
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData();
     }, []
     )
@@ -36,7 +36,7 @@ function AllAppointmentsList() {
     return (
         <div>
             <div>
-                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search VIN"/>
+                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search VIN" />
             </div>
             <h1>Appointments</h1>
             <table className="table table-striped">
@@ -55,7 +55,7 @@ function AllAppointmentsList() {
                 </thead>
                 <tbody>
                     {filteredAppointments.map(appointment => {
-                        return(
+                        return (
                             <tr key={appointment.id}>
                                 <td>{appointment.vin}</td>
                                 <td>{appointment.vip.toString()}</td>

@@ -8,10 +8,10 @@ function AppointmentsList() {
 
     const handleChange = (event) => {
         setFilter(event.target.value);
-      };
+    };
 
 
-    const getData = async() => {
+    const getData = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/filtered/')
         const data = await response.json()
         setAppointments(data.appointments)
@@ -20,23 +20,23 @@ function AppointmentsList() {
 
     let filteredAppointments = [];
     if (filterValue === "") {
-    filteredAppointments = appointments;
+        filteredAppointments = appointments;
     } else {
-    filteredAppointments = appointments.filter((appointment) =>
-      appointment.vin === filterValue
-    );
+        filteredAppointments = appointments.filter((appointment) =>
+            appointment.vin === filterValue
+        );
     }
 
 
-    const handleDelete = async(id) => {
-        const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, {method:"DELETE"})
+    const handleDelete = async (id) => {
+        const response = await fetch(`http://localhost:8080/api/appointments/edit/${id}/`, { method: "DELETE" })
         const data = await response.json();
         getData();
         window.location = "/appointments"
     }
 
-    const handleFinish = async(id) => {
-        const status = {finished : true}
+    const handleFinish = async (id) => {
+        const status = { finished: true }
         const fetchConfig = {
             method: 'put',
             body: JSON.stringify(status),
@@ -50,7 +50,7 @@ function AppointmentsList() {
         window.location = "/appointments"
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData();
     }, []
     )
@@ -59,7 +59,7 @@ function AppointmentsList() {
     return (
         <div>
             <div>
-                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search VIN"/>
+                <input className="form-control" value={filterValue} onChange={handleChange} placeholder="Search VIN" />
             </div>
             <h1>Appointments</h1>
             <table className="table table-striped">
@@ -78,7 +78,7 @@ function AppointmentsList() {
                 </thead>
                 <tbody>
                     {filteredAppointments.map(appointment => {
-                        return(
+                        return (
                             <tr key={appointment.id}>
                                 <td>{appointment.vin}</td>
                                 <td>{appointment.vip.toString()}</td>
@@ -88,10 +88,10 @@ function AppointmentsList() {
                                 <td>{appointment.technician.name}</td>
                                 <td>{appointment.reason}</td>
                                 <td>
-                                <button className="btn btn-success m-2" onClick={()=> {handleFinish(appointment.id)}}>Finish</button>
+                                    <button className="btn btn-success m-2" onClick={() => { handleFinish(appointment.id) }}>Finish</button>
                                 </td>
                                 <td>
-                                <button className="btn btn-danger m-2" onClick={()=> {handleDelete(appointment.id)}}>Cancel</button>
+                                    <button className="btn btn-danger m-2" onClick={() => { handleDelete(appointment.id) }}>Cancel</button>
                                 </td>
                             </tr>
                         );

@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success"
-          style={{ marginBottom: '1rem' }}>
+      style={{ marginBottom: '1rem' }}>
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">CarCar</NavLink>
         <button
@@ -15,7 +15,7 @@ function Nav() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-        <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto">
@@ -26,7 +26,7 @@ function Nav() {
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >Inventory</button>
+              >Inventory</button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
                   <Link className="dropdown-item" to="manufacturers">Manufacturers</Link>
@@ -46,25 +46,25 @@ function Nav() {
                 id="dropdownMenuButton2"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >Sales</button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+              >Sales</button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <li>
-                    <Link className="dropdown-item" to="sales">All Sales</Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="sales/history">Sales History</Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="sales/new">Record Sale</Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="salespeople/new">New Salesperson</Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="customers/new">New Customer</Link>
-                  </li>
-                </ul>
-              </div>
+                  <Link className="dropdown-item" to="sales">All Sales</Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="sales/history">Sales History</Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="sales/new">Record Sale</Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="salespeople/new">New Salesperson</Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="customers/new">New Customer</Link>
+                </li>
+              </ul>
+            </div>
             <div className="dropdown mx-1">
               <button
                 className="btn btn-success dropdown-toggle"
@@ -72,7 +72,7 @@ function Nav() {
                 id="dropdownMenuButton1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >Service</button>
+              >Service</button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
                   <Link className="dropdown-item" to="appointments">Current Appointments</Link>

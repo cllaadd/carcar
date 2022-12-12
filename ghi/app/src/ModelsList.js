@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 function ModelsList() {
     const [models, setModels] = useState([])
 
-    const getData = async() => {
+    const getData = async () => {
         const response = await fetch('http://localhost:8100/api/models/')
         const data = await response.json()
         setModels(data.models)
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData();
     }, []
     )
@@ -28,7 +28,7 @@ function ModelsList() {
                 </thead>
                 <tbody>
                     {models?.map(model => {
-                        return(
+                        return (
                             <tr key={model.id}>
                                 <td>{model.name}</td>
                                 <td>{model.manufacturer.name}</td>

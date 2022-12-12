@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 function ManufacturersList() {
     const [manufacturers, setManufacturers] = useState([])
 
-    const getData = async() => {
+    const getData = async () => {
         const response = await fetch('http://localhost:8100/api/manufacturers/')
         const data = await response.json()
         setManufacturers(data.manufacturers)
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         getData();
     }, []
     )
@@ -26,7 +26,7 @@ function ManufacturersList() {
                 </thead>
                 <tbody>
                     {manufacturers?.map(manufacturer => {
-                        return(
+                        return (
                             <tr key={manufacturer.id}>
                                 <td>{manufacturer.name}</td>
                             </tr>
