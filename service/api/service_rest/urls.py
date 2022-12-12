@@ -4,7 +4,6 @@ from .views import (api_technicians,
                     api_appointments,
                     api_appointment,
                     api_filtered_appointments,
-                    api_auto_vos,
                     )
 
 urlpatterns = [
@@ -37,10 +36,5 @@ urlpatterns = [
         "appointments/edit/<int:id>/",
         api_appointment,
         name="api_appointment",
-    ),
-    path(
-        "autovos/",
-        api_auto_vos,
-        name="api_auto_vos",
     ),
     ]

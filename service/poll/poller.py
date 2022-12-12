@@ -11,9 +11,6 @@ django.setup()
 
 from service_rest.models import AutomobileVO
 
-# Import models from service_rest, here.
-# from service_rest.models import Something
-
 def get_autos():
     response = requests.get("http://inventory-api:8000/api/automobiles")
     content = json.loads(response.content)

@@ -158,16 +158,3 @@ def api_filtered_appointments(request, auto_vin=None):
         encoder=AppointmentEncoder,
         safe=False,
     )
-
-@require_http_methods(["GET"])
-def api_auto_vos(request, auto_vin=None):
-    if auto_vin == None:
-        autos = AutomobileVO.objects.all()
-    else:
-        vin = auto_vin
-        autos = AutomobileVO.objects.filter(vin=vin)
-    return JsonResponse(
-        {"autos": autos},
-        encoder=AutomobileVOEncoder,
-        safe=False,
-    )
