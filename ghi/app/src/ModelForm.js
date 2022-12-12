@@ -4,7 +4,7 @@ class ModelForm extends React.Component {
     state = {
         name: '',
         pictureUrl: '',
-        manufacturer: [],
+        manufacturers: [],
         manufacturer: '',
     }
 
@@ -33,7 +33,7 @@ class ModelForm extends React.Component {
                 name: '',
                 pictureUrl: '',
                 manufacturer: '',
-                manufacturer: [],
+                manufacturers: [],
             };
             this.setState(cleared);
         }
