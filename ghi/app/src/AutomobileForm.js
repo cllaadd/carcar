@@ -33,6 +33,7 @@ class AutomobileForm extends React.Component {
                 year: '',
                 vin: '',
                 model: '',
+                models: [],
             };
             this.setState(cleared);
         }
@@ -74,7 +75,7 @@ class AutomobileForm extends React.Component {
                     <label htmlFor="vin">VIN</label>
                   </div>
                   <div className="mb-3">
-                    <select onChange={this.handleInputChange} required id="model"  name="model" className="form-select">
+                    <select onChange={this.handleInputChange} value = {this.state.model} required id="model"  name="model" className="form-select">
                     <option value="">Choose a model</option>
                         {this.state.models?.map(model => {
                             return (
