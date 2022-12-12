@@ -17,7 +17,7 @@ function AutomobilesList() {
 
     return (
         <div>
-            <h1>Vehicle models</h1>
+            <h1>Automobiles</h1>
             <table className="table table-striped">
                 <thead>
                     <tr>
